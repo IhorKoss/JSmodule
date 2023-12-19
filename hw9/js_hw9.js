@@ -146,3 +146,102 @@ for (const member of simpsons) {
 // Створити для кожного елементу масиву свій блок, блок розділити блоками, в яких будуть зберігатись значення окремих властивостей, для властивості modules зробити список з елементами
 // Приклад структири знаходиться у файлі example.png який лежить в папці з поточним фйлом
 // ------------------
+let coursesArray = [
+    {
+        title: 'JavaScript Complex',
+        monthDuration: 5,
+        hourDuration: 909,
+        modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'react', 'angular', 'aws', 'docker', 'git', 'node.js']
+    },
+    {
+        title: 'Java Complex',
+        monthDuration: 6,
+        hourDuration: 909,
+        modules: ['html',
+            'css',
+            'js',
+            'mysql',
+            'mongodb',
+            'angular',
+            'aws',
+            'docker',
+            'git',
+            'java core',
+            'java advanced']
+    },
+    {
+        title: 'Python Complex',
+        monthDuration: 6,
+        hourDuration: 909,
+        modules: ['html',
+            'css',
+            'js',
+            'mysql',
+            'mongodb',
+            'angular',
+            'aws',
+            'docker',
+            'python core',
+            'python advanced']
+    },
+    {
+        title: 'QA Complex',
+        monthDuration: 4,
+        hourDuration: 909,
+        modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'git', 'QA/QC']
+    },
+    {
+        title: 'FullStack',
+        monthDuration: 7,
+        hourDuration: 909,
+        modules: ['html',
+            'css',
+            'js',
+            'mysql',
+            'mongodb',
+            'react',
+            'angular',
+            'aws',
+            'docker',
+            'git',
+            'node.js',
+            'python',
+            'java']
+    },
+    {
+        title: 'Frontend',
+        monthDuration: 4,
+        hourDuration: 909,
+        modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'react', 'angular', 'aws', 'docker', 'git', 'sass']
+    }
+];
+for (const course of coursesArray) {
+    let generalBlock=document.createElement('div');
+
+    let titleBlock=document.createElement('div');
+    titleBlock.innerText=(course.title);
+
+    let wrapBlock=document.createElement('div');
+    wrapBlock.style.display='flex';
+    let monthBlock=document.createElement('div');
+    monthBlock.innerText=('month: '+course.monthDuration+';');
+    let hoursBlock=document.createElement('div');
+    hoursBlock.innerText=('hours: '+course.hourDuration);
+    hoursBlock.style.marginLeft='1vh'
+    wrapBlock.appendChild(monthBlock);
+    wrapBlock.appendChild(hoursBlock);
+
+    let listBlock=document.createElement('div');
+    let unorderedList=document.createElement('ul');
+    for (const element of course.modules) {
+        let listTag=document.createElement('li');
+        listTag.innerText=element;
+        unorderedList.appendChild(listTag);
+    }
+    listBlock.appendChild(unorderedList);
+
+    generalBlock.appendChild(titleBlock);
+    generalBlock.appendChild(wrapBlock);
+    generalBlock.appendChild(listBlock);
+    document.body.appendChild(generalBlock)
+}
