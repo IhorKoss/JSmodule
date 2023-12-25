@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>TASK 1</h2>
+<form name="userdata">
+    <input type="text" placeholder="name" name="name">
+    <input type="text" placeholder="sruname" name="sruname">
+    <input type="number" placeholder="age" name="age">
+    <button>SAVE</button>
+</form>
+<button id="show-btn">SHOW ALL</button>
+<div id="show-div"></div>
+<button id="reset-btn" onclick="(function (){
+    localStorage.removeItem('users')
+}())">RESET</button>
+<h2>TASK 2</h2>
+<div id="rld-count" style="height: 100px; width: 100px;font-size:50px;background-color: lightgray; margin-top:20px"></div>
+<button id="reset-rld-btn" onclick="(function (){
+    localStorage.removeItem('counter')
+}())">RESET</button>
+<h2>TASK 3</h2>
+<a href="index.html"><button>To index.html</button></a>
+<a href="sessions.html"><button>To sessions.html</button></a>
+<h2>TASK 4</h2>
+<div id="10-elements"></div>
+<button id="prev-btn">prev</button>
+<button id="next-btn">next</button>
+<h2>TASK 5</h2>
+<div id="text" style="height: 100px; width: 100px;font-size:50px;background-color: lightgray; margin-top:20px">bye</div>
+<button id="bye-btn">hide block</button>
+<button id="hi-btn">cancel</button>
+<script src="js_hw10.js"></script>
+<h2>TASK 6</h2>
+<form name="ageCheck">
+    <input type="number" placeholder="age" name="age">
+    <button>check</button>
+</form>
+</body>
+</html>

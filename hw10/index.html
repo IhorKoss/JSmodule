@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="hw10.html"><button>BACK</button></a>
+
+<script>
+    let sessions=localStorage.getItem('sessions');
+    let sessionsArr=JSON.parse(sessions)||[];
+    window.onload = function (){
+        let sessionDate= new Date;
+        let sessionYear = sessionDate.getFullYear();
+        let sessionMonth = sessionDate.getMonth();
+        let sessionDay = sessionDate.getDate();
+        let sessionHours = sessionDate.getHours();
+        let sessionMinutes = sessionDate.getMinutes();
+        let sessionSeconds = sessionDate.getSeconds()
+        let fullSessionDate = (`date: ${sessionDay}.${sessionMonth+1}.${sessionYear} | time: ${sessionHours}:${sessionMinutes}:${sessionSeconds}`)
+        sessionsArr.push(fullSessionDate);
+        localStorage.setItem('sessions',JSON.stringify(sessionsArr));
+    }
+</script>
+</body>
+</html>

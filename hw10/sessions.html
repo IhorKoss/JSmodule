@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+let sessionsArr = JSON.parse(localStorage.getItem('sessions'))||['no data received'];
+let blockSessions=document.createElement('div');
+for (let i = 0; i < sessionsArr.length; i++) {
+    const session = sessionsArr[i];
+    let sessionTime=document.createElement('p');
+    sessionTime.innerText=(`Session №${i+1}: ${session}`);
+    blockSessions.appendChild(sessionTime);
+}
+document.body.appendChild(blockSessions);
+</script>
+</body>
+</html>
