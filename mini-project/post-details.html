@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>
+    let url = new URL(location.href);
+    let userId=url.searchParams.get('id');
+    let postID=url.searchParams.get('postID');
+    let postContainer = document.createElement('div');
+    postContainer.classList.add('post-details-container');
+    fetch('https://jsonplaceholder.typicode.com/users/'+userId+'/posts/')
+        .then(response=>response.json())
+        .then(posts=>{
+            let userID=document.createElement('h1');
+            userID.innerText=`User's ID: ${userId}`
+            for (const post of posts) {
+                if (postID==post.id){
+                    let postDetails=document.createElement('div');
+                    postDetails.classList.add('post-details-block');
+                    let postTitle=document.createElement('h2');
+                    postTitle.innerText=`${post.id}. ${post.title}`;
+                    let postBody=document.createElement('p');
+                    postBody.innerText=`${post.body}`;
+                    let commentBtn=document.createElement('a');
+                    commentBtn.classList.add('comment-btn');
+                    let commentsContainer=document.createElement('div');
+                    commentsContainer.classList.add('comments-container');
+                    commentBtn.innerText='comments';
+                    commentBtn.href='#';
+                    commentBtn.onclick=function () {
+                        fetch('https://jsonplaceholder.typicode.com/posts/' + postID + '/comments')
+                            .then(response => response.json())
+                            .then(comments => {
+                                commentsContainer.replaceChildren();
+                                for (const comment of comments) {
+                                    let comBlock = document.createElement('div');
+                                    comBlock.classList.add('comment-block');
+                                    let commentData = document.createElement('h4');
+                                    commentData.innerText = `${comment.name} (email: ${comment.email})`;
+                                    let commentBody = document.createElement('p');
+                                    commentBody.innerText = `${comment.body}`;
+                                    comBlock.append(commentData, commentBody);
+                                    commentsContainer.append(comBlock);
+                                }
+                            });
+                    }
+                    postDetails.append(postTitle,postBody);
+                    postContainer.append(userID,postDetails,commentBtn,commentsContainer);
+                    document.body.append(postContainer);
+
+                }
+            }
+        })
+</script>
+</body>
+</html>

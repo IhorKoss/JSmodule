@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="user-container"></div>
+<script>
+    fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response=>response.json())
+        .then(users=>{
+            let usersContainer=document.getElementById('user-container');
+            for (const user of users) {
+                let userBlock=document.createElement("div");
+                userBlock.classList.add('user-block');
+                let userName=document.createElement('h3');
+                userName.innerText=`${user.id}. ${user.name}`;
+                let userLink = document.createElement('a');
+                userLink.classList.add('user-btn');
+                userLink.innerText=`FULL INFO`;
+                userLink.href='./user-details.html?id='+user.id;
+                userBlock.append(userName, userLink);
+                usersContainer.appendChild(userBlock);
+            }
+            document.body.appendChild(usersContainer);
+        })
+</script>
+</body>
+</html>

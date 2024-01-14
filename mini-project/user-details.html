@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>
+    let url = new URL(location.href);
+    let userId=url.searchParams.get('id');
+    fetch('https://jsonplaceholder.typicode.com/users/'+userId)
+        .then(response=>response.json())
+        .then(user=>{
+            let userDiv=document.createElement('div');
+            userDiv.classList.add('user-details-block');
+            let userDataDiv=document.createElement('div');
+            userDataDiv.classList.add('userdata-block');
+            let name = document.createElement('h1');
+            name.innerText=`${user.id}. ${user.name}`;
+            let emailData=document.createElement("h4");
+            emailData.innerText=`USERNAME: ${user.username}; EMAIL: ${user.email}`
+            let userAdress=document.createElement('h4');
+            userAdress.innerText=`User address: ${user.address.street} st., ${user.address.suite}, ${user.address.city}(zip:${user.address.zipcode}), geolocation: ${user.address.geo.lat} latitude & ${user.address.geo.lng} longitude`;
+            let userContacts=document.createElement('h4');
+            let userWebSite=document.createElement('a');
+            userWebSite.innerText=`${user.website}`;
+            userWebSite.href=`${user.website}`;
+            userContacts.innerText=`Contacts: ${user.phone}, `;
+            userContacts.append(userWebSite);
+            let userCompany = document.createElement('p');
+            let postBtn=document.createElement('a');
+            postBtn.classList.add('post-btn');
+            postBtn.innerText='post of current user';
+            postBtn.href='#';
+            let postContainer=document.createElement('div');
+            postContainer.classList.add('post-container');
+            postBtn.onclick=function (){
+                fetch('https://jsonplaceholder.typicode.com/users/'+userId+'/posts')
+                    .then(response=>response.json())
+                    .then(posts=>{
+                        postContainer.replaceChildren();
+                        for (const post of posts) {
+                            let postTitle=document.createElement('div');
+                            postTitle.classList.add('post-block');
+                            let postTitleText=document.createElement('p');
+                            postTitleText.innerText=`${post.title}`;
+                            let postDetails=document.createElement('a');
+                            postDetails.classList.add('post-details-btn');
+                            postDetails.innerText='DETAILS';
+                            postDetails.href='./post-details.html?id='+user.id+'&postID='+post.id;
+                            postTitle.append(postTitleText, postDetails);
+                            postContainer.append(postTitle);
+                        }
+                    })
+            }
+            userCompany.innerText=`Company: ${user.company.name}, motto: ${user.company.catchPhrase}, user's position: ${user.company.bs}`;
+            userDataDiv.append(emailData,userAdress,userContacts,userCompany,);
+            userDiv.append(name, userDataDiv,postBtn,postContainer)
+            document.body.append(userDiv);
+        })
+</script>
+</body>
+</html>
